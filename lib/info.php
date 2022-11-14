@@ -1,6 +1,6 @@
 <?php
 
-class artikel {
+class info {
 
     private $connection;
 
@@ -8,15 +8,15 @@ class artikel {
         $this->connection = $connection;
     }
   
-    public function selecteerArtikel($artikel_id) {
+    public function selecteerInfo($info_id) {
         
-        $sql = "select * from artikel where id = $artikel_id";
+        $sql = "select * from info where id = $info_id";
         echo $sql; 
         $result = mysqli_query($this->connection, $sql);
 
-        // $artikel = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        // $info = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
-        return($artikel_id);
+        return($info_id);
 
     }
 
