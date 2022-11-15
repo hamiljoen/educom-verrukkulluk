@@ -18,7 +18,7 @@ $keu = new keuken($db->getConnection());
 $typ = new type($db->getConnection());
 
 /// VERWERK 
-$data = $typ->selecteerType(3); 
+$data = $ing->selecteerIngredient(2); 
 
 /// RETURN
 var_dump($data);
