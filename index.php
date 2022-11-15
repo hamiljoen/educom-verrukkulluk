@@ -20,7 +20,7 @@ $typ = new type($db->getConnection());
 $ger = new gerecht($db->getConnection());
 
 /// VERWERK 
-$data = $inf->selecteerInfo(4);
+$data = $inf->selecteerInfo(5);
 
 /// RETURN
 var_dump($data);
