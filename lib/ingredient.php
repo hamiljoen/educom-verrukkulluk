@@ -1,6 +1,6 @@
 <?php
 
-class artikel {
+class ingredient {
 
     private $connection;
 
@@ -8,9 +8,9 @@ class artikel {
         $this->connection = $connection;
     }
   
-    public function selecteerArtikel($artikel_id) {
+    public function selecteerArtikel($ingredient_id) {
         
-        $sql = "select * from artikel where id = $artikel_id";
+        $sql = "select * from ingredient where id = $ingredient_id";
         echo $sql; 
         $result = mysqli_query($this->connection, $sql);
 
@@ -21,7 +21,7 @@ class artikel {
     }
 
     public function searchArtikel(){
-        $id = 'Burger';
+        $id = 'Avocado';
         $sql = "SELECT * FROM artikel WHERE name LIKE '%$id%' ";
 
         $data = [];
