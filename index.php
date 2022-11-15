@@ -7,6 +7,7 @@ require_once("lib/info.php");
 require_once("lib/ingredient.php");
 require_once("lib/keuken.php");
 require_once("lib/type.php");
+require_once("lib/gerecht.php");
 
 /// INIT
 $db = new database();
@@ -16,9 +17,10 @@ $inf = new info($db->getConnection());
 $ing = new ingredient($db->getConnection());
 $keu = new keuken($db->getConnection());
 $typ = new type($db->getConnection());
+$ger = new gerecht($db->getConnection());
 
 /// VERWERK 
-$data = $ing->selecteerIngredient(2); 
+$data = $ger->selecteerGerecht(3); 
 
 /// RETURN
 var_dump($data);
