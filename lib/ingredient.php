@@ -14,7 +14,7 @@ class ingredient {
         echo $sql; 
         $result = mysqli_query($this->connection, $sql);
 
-        $ingredient = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
         return($ingredient);
 
