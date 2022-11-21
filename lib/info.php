@@ -10,8 +10,12 @@ class info {
   
     public function selecteerInfo($info_id) {
         
-        $sql = "select * from info where id = $info_id";
-        echo $sql; 
+        $sql = "select * from info where id = $gerecht";
+        
+        result = execute query;
+
+        while ($row = fetcharray)
+
         $result = mysqli_query($this->connection, $sql);
 
         // $info = mysqli_fetch_array($result, MYSQLI_ASSOC);

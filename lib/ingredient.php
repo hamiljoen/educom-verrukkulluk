@@ -10,7 +10,7 @@ class ingredient {
   
     public function selecteerIngredient($ingredient_id) {
         
-        $sql = "select * from ingredient where id = $ingredient_id";
+        $sql = "select * from gerecht where id = $gerecht_id";
         echo $sql; 
         $result = mysqli_query($this->connection, $sql);
 

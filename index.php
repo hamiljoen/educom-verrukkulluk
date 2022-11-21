@@ -16,13 +16,13 @@ $art = new artikel($db->getConnection());
 $usr = new user($db->getConnection());
 $inf = new info($db->getConnection());
 $ing = new ingredient($db->getConnection());
-$keu = new keuken($db->getConnection());
+$keu = new keukentype($db->getConnection());
 $typ = new type($db->getConnection());
 $ger = new gerecht($db->getConnection());
 $lij = new boodschappenlijst($db->getConnection());
 
 /// VERWERK 
-$data = $lij->selecteerBoodschappenlijst(4);
+$data = $keu->selecteerKeukentype(1);
 
 /// RETURN
 var_dump($data);

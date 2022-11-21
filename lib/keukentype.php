@@ -1,6 +1,6 @@
 <?php
 
-class keuken {
+class keukentype {
 
     private $connection;
 
@@ -8,15 +8,15 @@ class keuken {
         $this->connection = $connection;
     }
   
-    public function selecteerKeuken($keuken_id) {
+    public function selecteerKeukenType ($keukentype_id) {
         
-        $sql = "select * from keuken where id = $keuken_id";
-        echo $sql; 
+        $sql = "SELECT * FROM keukentype WHERE id = $keukentype_id";
+
         $result = mysqli_query($this->connection, $sql);
 
         $keuken = mysqli_fetch_array($result, MYSQLI_ASSOC);
-
-        return($keuken);
+ 
+        return($keukentype);
 
     }
 
