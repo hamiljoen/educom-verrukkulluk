@@ -6,20 +6,28 @@ class ingredient {
 
     public function __construct($connection) {
         $this->connection = $connection;
+        $this->art = new artikel ($connection);
+    }
+
+    private function selecteerArtikel($artikel_id) {
+            
+        $data = $this->art->selecteerArtikel($artikel_id);
+        return($data);
+
     }
     
     //selectie ingredient
 
-    public function selecteerIngredient($ingredient_id) {
+    public function selecteerIngredient($gerecht_id) {
         
-        $sql = "select * from gerecht where id = $gerecht_id";
+        $sql = "select * from ingredient where id = $gerecht_id";
         $return =[];
       
         $result = mysqli_query($this->connection, $sql);
 
             while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 
-            $artikel_id = $row ["artikel-id"];
+            $artikel_id = $row ["artikel_id"];
             $artikel = $this->selecteerArtikel($artikel_id);
             $return[] = [
 
@@ -33,14 +41,6 @@ class ingredient {
             ];
 
             }
-
-    private function selecteerArtikel($artikel_id) {
-            
-        $art = new artikel($this->connection);
-        $data = $art;
-        $arikel = $this->selectArtikel($art_id)
-
-    }
 
         return($artikel);
 

@@ -11,7 +11,7 @@ class gerecht {
     public function selecteerGerecht($gerecht_id) {
         
         $sql = "select * from gerecht where id = $gerecht_id";
-        echo $sql; 
+
         $result = mysqli_query($this->connection, $sql);
 
         $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
