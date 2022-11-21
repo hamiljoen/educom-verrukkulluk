@@ -10,9 +10,7 @@ class info {
   
     public function selecteerInfo($info_id) {
         
-        $sql = "select * from info where id = $gerecht";
-        
-        result = execute query;
+        $sql = "select * from gerecht where id = $gerecht_id";
 
         while ($row = fetcharray)
 
