@@ -63,8 +63,8 @@ class info {
                             "datum" => $row["datum"],
                             "nummeriekveld" => $row['nummeriekveld'],
                             "tekstveld" => $row['tekstveld']
-    
-                        ];
+
+                        ];        
 
         return($arr);
 
