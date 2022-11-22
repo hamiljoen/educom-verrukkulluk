@@ -20,9 +20,10 @@ $ger = new gerecht($db->getConnection());
 $lij = new boodschappenlijst($db->getConnection());
 
 /// VERWERK 
-$data = $inf->selecteerInfo(1, "O");
+$data = $inf->selecteerInfo(1,"O");
 
 /// RETURN
+echo "<pre>";
 var_dump($data);
 
 ?>

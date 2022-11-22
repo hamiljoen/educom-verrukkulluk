@@ -17,7 +17,7 @@ class gerecht {
 
     }
     
-    //selectie user
+    //selectie gerecht
 
     public function selecteerGerecht($user_id) {
         
@@ -28,15 +28,15 @@ class gerecht {
 
             while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 
-            $user_id = $row ["user_id"];
+
             $user = $this->selectUser($user_id);
             $return[] = [
 
                 "id" => $row["id"],
-                "user_name" => $user_name,
+                "username" =>  $row["username"],
                 "password" => $row["password"],
                 "email" => $row["email"],
-                "afbeelding" => $row["afbeedling"]
+                "afbeelding" => $row["afbeelding"]
 
             ];
 
