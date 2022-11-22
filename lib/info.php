@@ -42,7 +42,9 @@ class info {
 
                     ];
 
-        return($arr);
+                    // return
+
+                    return($arr);
 
     }
 
