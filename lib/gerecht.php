@@ -3,20 +3,46 @@
 class gerecht {
 
     private $connection;
+    private $usr;
 
     public function __construct($connection) {
         $this->connection = $connection;
+        $this->usr = new user ($connection);
     }
-  
-    public function selecteerGerecht($gerecht_id) {
-        
-        $sql = "select * from gerecht where id = $gerecht_id";
 
+    private function selectUser($user_id) {
+            
+        $user = $this->usr->selecteerUser($user_id);
+        return($user);
+
+    }
+    
+    //selectie user
+
+    public function selecteerGerecht($user_id) {
+        
+        $sql = "SELECT * FROM user WHERE id = $user_id";
+        $return =[];
+      
         $result = mysqli_query($this->connection, $sql);
 
-        $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
+            while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 
-        return($gerecht);
+            $user_id = $row ["user_id"];
+            $user = $this->selectUser($user_id);
+            $return[] = [
+
+                "id" => $row["id"],
+                "user_name" => $user_name,
+                "password" => $row["password"],
+                "email" => $row["email"],
+                "afbeelding" => $row["afbeedling"]
+
+            ];
+
+            }
+
+        return($user);
 
     }
 

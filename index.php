@@ -20,7 +20,7 @@ $ger = new gerecht($db->getConnection());
 $lij = new boodschappenlijst($db->getConnection());
 
 /// VERWERK 
-$data = $ing->selecteerIngredient(3);
+$data = $ing->selecteerIngredient(1);
 
 /// RETURN
 var_dump($data);

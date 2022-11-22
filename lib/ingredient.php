@@ -20,7 +20,7 @@ class ingredient {
 
     public function selecteerIngredient($gerecht_id) {
         
-        $sql = "select * from ingredient where id = $gerecht_id";
+        $sql = "SELECT * FROM ingredient WHERE id = $gerecht_id";
         $return =[];
       
         $result = mysqli_query($this->connection, $sql);
@@ -36,13 +36,15 @@ class ingredient {
                 "artikel_id" => $artikel_id,
                 "aantal" => $row["aantal"],
                 "naam" => $artikel["naam"],
-                "omschrijving" => $artikel["omschrijving"]
+                "omschrijving" => $row["omschrijving"],
+                "prijs" => $row["prijs"],
+                "calorien" => $row["calorien"],
 
             ];
 
             }
 
-        return($artikel);
+        return($return);
 
     }
 
