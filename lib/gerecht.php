@@ -10,13 +10,42 @@ class gerecht {
         $this->usr = new user ($connection);
     }
 
-    private function selectUser($user_id) {
+    //      selecteer User
+
+    public function selectUser($user_id) {
             
         $user = $this->usr->selecteerUser($user_id);
         return($user);
 
     }
+
+    //      selecteer Waardering
+
+        public function selectRating($user_id) {
+            
+            $user = $this->usr->selecteerUser($user_id);
+            return($user);
     
+        }
+
+    //      selecteer Bereidingswijze
+
+            public function selectRating($user_id) {
+            
+                $user = $this->usr->selecteerUser($user_id);
+                return($user);
+        
+            }
+    
+    //      selecteer Opmerkingen
+
+    public function selectRemarks($user_id) {
+            
+        $user = $this->usr->selecteerUser($user_id);
+        return($user);
+
+    }
+
     //selectie gerecht
 
     public function selecteerGerecht($user_id) {

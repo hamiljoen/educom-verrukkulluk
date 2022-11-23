@@ -20,7 +20,7 @@ $ger = new gerecht($db->getConnection());
 $lij = new boodschappenlijst($db->getConnection());
 
 /// VERWERK 
-$data = $inf->deleteFavoriet(1,1);
+$data = $ger->selectUser(1);
 
 /// RETURN
 echo "<pre>";
