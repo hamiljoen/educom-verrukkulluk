@@ -19,24 +19,22 @@ class info {
     
     //    addFavoriet ($gerecht_id, $record_type)
 
-    public function addFavoriet($gerecht_id, $record_type) {
+    public function addFavoriet($gerecht_id, $user_id) {
 
-        $sql = "INSERT INTO info (gerecht_id, record_type, user_id)\n";
-        $return = [];
+        $sql = "INSERT INTO info (gerecht_id, record_type, user_id) VALUES ($gerecht_id, 'F', $user_id)";
 
         $result = mysqli_query($this->connection, $sql);
-        $arr = [];
+
 
     }
 
-        //    deleteFavoriet ($gerecht_id, $record_type)
+        //    deleteFavoriet ($gerecht_id)
 
-        public function deleteFavoriet($gerecht_id, $record_type) {
+        public function deleteFavoriet($gerecht_id, $user_id) {
 
-            $sql = "DELETE O FROM info WHERE record_type = '$record_type'";
-    
+            $sql = "DELETE FROM info where record_type = 'F' and gerecht_id = $gerecht_id and user_id = $user_id";
+
             $result = mysqli_query($this->connection, $sql);
-            $arr = [];
     
         }
 
