@@ -9,6 +9,7 @@ class gerecht {
         $this->connection = $connection;
         $this->usr = new user ($connection);
         $this->ing = new ingredient ($connection);
+        $this->inf = new info ($connection);
     }
 
     //      selecteer User
@@ -30,11 +31,29 @@ class gerecht {
     
     }
 
-    //      selectie Waardering
+    //      selecteer Waardering
 
-    public function selecteerRating($record_type) {
+    public function selectRating($gerecht_id, $record_type) {
+            
+        $info = $this->inf->selectInfo($gerecht_id, 'W');
+        return($info);
+    
+    }
+
+    //      selecteer Bereidingswijze
+
+    public function selectSteps($gerecht_id, $record_type) {
+            
+        $info = $this->inf->selectInfo($gerecht_id, 'B');
+        return($info);
+    
+    }
+
+    //      selectie Opmerkingen
+
+    public function selectRemarks($record_type) {
         
-        $sql = "SELECT * FROM info WHERE record_type = 'W'";
+        $sql = "SELECT * FROM info WHERE record_type = 'O'";
         $return = [];
 
         $result = mysqli_query($this->connection, $sql);
@@ -42,7 +61,7 @@ class gerecht {
 
             while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 
-                if ($record_type == "W") { 
+                if ($record_type == "O") { 
                     $user_id = $row ["user_id"];
                     $arr[] = [
 
@@ -56,41 +75,11 @@ class gerecht {
 
                     ];
 
-             return($arr);
-    }
+                }}
 
-} }
+                return($arr);
+            }
 
-    //      selectie Bereidingswijze
-
-    public function selectSteps($record_type) {
-        
-        $sql = "SELECT * FROM info WHERE record_type = 'B'";
-        $return = [];
-
-        $result = mysqli_query($this->connection, $sql);
-        $arr = [];
-
-            while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-
-                if ($record_type == "B") { 
-                    $user_id = $row ["user_id"];
-                    $arr[] = [
-
-                        "id" => $row["id"],
-                        "gerecht_id" => $row ['gerecht_id'],
-                        "record_type" => $row['record_type'],
-                        "user_id" => $row['user_id'],
-                        "datum" => $row['datum'],
-                        "nummeriekveld" => $row['nummeriekveld'],       
-                        "tekstveld" => $row['tekstveld']
-
-                    ];
-
-             return($arr);
-    }
-
-} }
 
 
     //selectie gerecht

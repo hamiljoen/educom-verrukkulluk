@@ -40,7 +40,7 @@ class info {
 
     //      selectie ingredient info
 
-    public function selecteerInfo($gerecht_id, $record_type) {
+    public function selectInfo($gerecht_id, $record_type) {
         
         $sql = "SELECT * FROM info WHERE gerecht_id = '$gerecht_id' AND record_type = '$record_type'";
         $return = [];
@@ -50,7 +50,7 @@ class info {
 
             while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 
-                if ($record_type == "O" || $record_type == "F") { 
+                if ($record_type == "O" || $record_type == "B" || $record_type == "W" || $record_type == "F") { 
                     $user_id = $row ["user_id"];
                     $user = $this->usr->selecteerUser($user_id);
                     $arr[] = [
