@@ -61,18 +61,16 @@ class info {
                         "user_id" => $row['user_id'],
                         "datum" => $row['datum'],
                         "user" => $user,
-                        "nummeriekveld" => $row['nummeriekveld'],
+                        "nummeriekveld" => $row['nummeriekveld'],       
                         "tekstveld" => $row['tekstveld']
 
                     ];
 
-
-             return($arr);
     }       
-
-            return($arr);
-
-
+            
 }
+
+return($arr);
+
     }}
 ?>
