@@ -20,7 +20,7 @@ $ger = new gerecht($db->getConnection());
 $lij = new boodschappenlijst($db->getConnection());
 
 /// VERWERK 
-$data = $inf->selecteerInfo(4,'F');
+$data = $ger->selectSteps("B");
 
 /// RETURN
 echo "<pre>";

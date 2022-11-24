@@ -61,6 +61,38 @@ class gerecht {
 
 } }
 
+    //      selectie Bereidingswijze
+
+    public function selectSteps($record_type) {
+        
+        $sql = "SELECT * FROM info WHERE record_type = 'B'";
+        $return = [];
+
+        $result = mysqli_query($this->connection, $sql);
+        $arr = [];
+
+            while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+
+                if ($record_type == "B") { 
+                    $user_id = $row ["user_id"];
+                    $arr[] = [
+
+                        "id" => $row["id"],
+                        "gerecht_id" => $row ['gerecht_id'],
+                        "record_type" => $row['record_type'],
+                        "user_id" => $row['user_id'],
+                        "datum" => $row['datum'],
+                        "nummeriekveld" => $row['nummeriekveld'],       
+                        "tekstveld" => $row['tekstveld']
+
+                    ];
+
+             return($arr);
+    }
+
+} }
+
+
     //selectie gerecht
 
     public function selecteerGerecht($user_id) {
