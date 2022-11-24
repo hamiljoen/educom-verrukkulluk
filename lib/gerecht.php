@@ -8,6 +8,7 @@ class gerecht {
     public function __construct($connection) {
         $this->connection = $connection;
         $this->usr = new user ($connection);
+        $this->ing = new ingredient ($connection);
     }
 
     //      selecteer User
@@ -19,31 +20,26 @@ class gerecht {
 
     }
 
+
+    //      selecteer Ingredient
+
+    public function selectIngredient($ingredient_id) {
+            
+        $ingredient = $this->ing->selecteerIngredient($ingredient_id);
+        return($ingredient);
+    
+    }
+
     //      selecteer Waardering
 
-        public function selectRating($user_id) {
-            
-            $user = $this->usr->selecteerUser($user_id);
-            return($user);
-    
-        }
+    public function selectRating($info_id) {
 
-    //      selecteer Bereidingswijze
+        $sql = "SELECT * FROM info WHERE record_type = 'W'";
+        $return = [];
 
-            public function selectRating($user_id) {
-            
-                $user = $this->usr->selecteerUser($user_id);
-                return($user);
+        $result = mysqli_query($this->connection, $sql);
+        $arr = [];
         
-            }
-    
-    //      selecteer Opmerkingen
-
-    public function selectRemarks($user_id) {
-            
-        $user = $this->usr->selecteerUser($user_id);
-        return($user);
-
     }
 
     //selectie gerecht
