@@ -10,6 +10,13 @@ class gerecht {
         $this->usr = new user ($connection);
         $this->ing = new ingredient ($connection);
         $this->inf = new info ($connection);
+   
+    }
+
+    private function selectIngredienten($gerecht_id) {
+
+        $ingredienten = $this->ing->selecteerIngredienten($gerecht_id);
+        return($ingredienten);
     }
 
     //      selecteer User
@@ -20,7 +27,6 @@ class gerecht {
         return($user);
 
     }
-
 
     //      selecteer Ingredient
 
@@ -49,67 +55,79 @@ class gerecht {
     
     }
 
-    //      selectie Opmerkingen
+    //      selecteer Opmerkingen
 
-    public function selectRemarks($record_type) {
+    public function selectRemarks($gerecht_id, $record_type) {
+            
+    $info = $this->inf->selectInfo($gerecht_id, 'O');
+    return($info);
         
-        $sql = "SELECT * FROM info WHERE record_type = 'O'";
-        $return = [];
+        }
+
+    //         selectie gerecht
+
+    public function selecteerGerecht($gerecht_id) {
+        
+        $sql = "SELECT * FROM gerecht WHERE id = $gerecht_id";
 
         $result = mysqli_query($this->connection, $sql);
-        $arr = [];
 
-            while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+        $gerechten =[];
 
-                if ($record_type == "O") { 
-                    $user_id = $row ["user_id"];
-                    $arr[] = [
+        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 
-                        "id" => $row["id"],
-                        "gerecht_id" => $row ['gerecht_id'],
-                        "record_type" => $row['record_type'],
-                        "user_id" => $row['user_id'],
-                        "datum" => $row['datum'],
-                        "nummeriekveld" => $row['nummeriekveld'],       
-                        "tekstveld" => $row['tekstveld']
-
-                    ];
-
-                }}
-
-                return($arr);
-            }
-
-
-
-    //selectie gerecht
-
-    public function selecteerGerecht($user_id) {
-        
-        $sql = "SELECT * FROM user WHERE id = $user_id";
-        $return =[];
-      
-        $result = mysqli_query($this->connection, $sql);
-
-            while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-
-
-            $user = $this->selectUser($user_id);
-            $return[] = [
+            $ingredienten = $this->selecteerIngredienten($row["id"]);
+            $prijs = $this->calcPrice($ingredienten);
+            $calorieen = $this->calcCalories($ingredienten);
+            
+            $gerechten = [
 
                 "id" => $row["id"],
-                "username" =>  $row["username"],
-                "password" => $row["password"],
-                "email" => $row["email"],
-                "afbeelding" => $row["afbeelding"]
+                "user_id" =>  $row["user_id"],
+                "datum_toegevoegd" => $row["datum_toegevoegd"],
+                "titel" => $row["titel"],
+                "kort_omschrijving" => $row["kort_omschrijving"],
+                "lange_omschrijving" => $row["lange_omschrijving"],
+                "afbeelding" => $row["afbeelding"],
+                "aantal" => $this->ing->SelecteerArtikel($row["aantal"]),
+                "prijs" => $this->ing->SelecteerArtikel($row["prijs"]),
+                "eenheid" => $this->ing->SelecteerArtikel($row["eenheid"]),
+                "verpakking" => $this->ing->SelecteerArtikel($row["verpakking"]),
+                "calorien" => $this->ing->SelecteerArtikel($row["calorien"]),
 
             ];
 
-            }
+    }
 
-        return($user);
+        return($ingredienten);
 
     }
+
+    //      selecteer calcPrice
+
+        public function calcPrice($ingredient_id) {
+        
+            foreach ($ingredient as ingredient) {
+            $prijs += $ingredient + ["prijs"]; $ingredient  + ["aantal"];
+
+            }
+       
+            return($prijs);
+            
+            }
+
+    //      selecteer calcCalories
+
+        public function calcCalories($ingredient_id) {
+        
+            foreach ($ingredient as ingredient) {
+            $calorieen += $ingredient + ["calorien"]; $ingredient  + ["aantal"];
+            
+        }
+   
+            return($calorieen);
+        
+            }
 
 }
 

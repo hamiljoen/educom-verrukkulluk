@@ -38,6 +38,8 @@ class ingredient {
                 "naam" => $artikel["naam"],
                 "omschrijving" => $row["omschrijving"],
                 "prijs" => $row["prijs"],
+                "eenheid" => $row["eenheid"],
+                "verpakking" => $row["verpakking"],
                 "calorien" => $row["calorien"],
 
             ];
