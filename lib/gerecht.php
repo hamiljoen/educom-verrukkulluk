@@ -15,7 +15,8 @@ class gerecht {
 
     private function selectIngredienten($gerecht_id) {
 
-        $ingredienten = $this->ing->selecteerIngredienten($gerecht_id);
+        $ingredienten = $this->ing->selecteerIngredient($gerecht_id);
+
         return($ingredienten);
     }
 
@@ -64,7 +65,7 @@ class gerecht {
         
         }
 
-    //         selectie gerecht
+    //       selecteer gerecht
 
     public function selecteerGerecht($gerecht_id) {
         
@@ -76,7 +77,7 @@ class gerecht {
 
         while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 
-            $ingredienten = $this->selecteerIngredienten($row["id"]);
+            $ingredienten = $this->selectIngredienten($row["id"]);
             $prijs = $this->calcPrice($ingredienten);
             $calorieen = $this->calcCalories($ingredienten);
             
@@ -86,29 +87,29 @@ class gerecht {
                 "user_id" =>  $row["user_id"],
                 "datum_toegevoegd" => $row["datum_toegevoegd"],
                 "titel" => $row["titel"],
-                "kort_omschrijving" => $row["kort_omschrijving"],
+                "korte_omschrijving" => $row["korte_omschrijving"],
                 "lange_omschrijving" => $row["lange_omschrijving"],
                 "afbeelding" => $row["afbeelding"],
-                "aantal" => $this->ing->SelecteerArtikel($row["aantal"]),
-                "prijs" => $this->ing->SelecteerArtikel($row["prijs"]),
-                "eenheid" => $this->ing->SelecteerArtikel($row["eenheid"]),
-                "verpakking" => $this->ing->SelecteerArtikel($row["verpakking"]),
-                "calorien" => $this->ing->SelecteerArtikel($row["calorien"]),
+                "verpakking" => $ingredienten,
+                "calorien" => $calorieen,
+                "prijs" => $prijs
 
             ];
 
     }
 
-        return($ingredienten);
+        return($gerechten);
 
     }
 
-    //      selecteer calcPrice
+        //      selecteer calcPrice
 
-        public function calcPrice($ingredient_id) {
-        
-            foreach ($ingredient as ingredient) {
-            $prijs += $ingredient + ["prijs"]; $ingredient  + ["aantal"];
+        public function calcPrice($ingredienten) {
+            
+            $prijs=0;
+
+            foreach ($ingredienten as $ingredient)  {
+            $prijs += $ingredient["prijs"]*$ingredient["aantal"]/$ingredient["verpakking"];
 
             }
        
@@ -118,14 +119,15 @@ class gerecht {
 
     //      selecteer calcCalories
 
-        public function calcCalories($ingredient_id) {
-        
-            foreach ($ingredient as ingredient) {
-            $calorieen += $ingredient + ["calorien"]; $ingredient  + ["aantal"];
+        public function calcCalories($ingredienten) {    
+
+            $calorien=0;  
             
-        }
-   
-            return($calorieen);
+            foreach ($ingredienten as $ingredient)  {
+            $calorien +=$ingredient["calorien"]*$ingredient["aantal"]/$ingredient["verpakking"];
+            }
+
+            return($calorien);
         
             }
 

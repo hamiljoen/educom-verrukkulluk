@@ -20,7 +20,7 @@ $ger = new gerecht($db->getConnection());
 $lij = new boodschappenlijst($db->getConnection());
 
 /// VERWERK 
-$data = $ger->calcPrice(1);
+$data = $ger->selecteerGerecht(1); 
 
 /// RETURN
 echo "<pre>";
