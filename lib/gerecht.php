@@ -10,6 +10,7 @@ class gerecht {
         $this->usr = new user ($connection);
         $this->ing = new ingredient ($connection);
         $this->inf = new info ($connection);
+        $this->keu = new keukentype ($connection);
    
     }
 
@@ -67,9 +68,14 @@ class gerecht {
 
     //       selecteer gerecht
 
-    public function selecteerGerecht($gerecht_id) {
+    public function selecteerGerecht($gerecht_id=null) {
         
         $sql = "SELECT * FROM gerecht WHERE id = $gerecht_id";
+
+        if (is_null($gerecht_id)) {
+        
+            $sql = "WHERE id = $gerecht_id";
+        }
 
         $result = mysqli_query($this->connection, $sql);
 
@@ -78,6 +84,7 @@ class gerecht {
         while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 
             $ingredienten = $this->selectIngredienten($row["id"]);
+            $keukentype = $this->selectKeukentype($row["id"]);
             $prijs = $this->calcPrice($ingredienten);
             $calorieen = $this->calcCalories($ingredienten);
             
@@ -109,7 +116,7 @@ class gerecht {
             $prijs=0;
 
             foreach ($ingredienten as $ingredient)  {
-            $prijs += $ingredient["prijs"]*$ingredient["aantal"]/$ingredient["verpakking"];
+            $prijs += ($ingredient["prijs"]*$ingredient["aantal"])/$ingredient["verpakking"];
 
             }
        
@@ -124,7 +131,7 @@ class gerecht {
             $calorien=0;  
             
             foreach ($ingredienten as $ingredient)  {
-            $calorien +=$ingredient["calorien"]*$ingredient["aantal"]/$ingredient["verpakking"];
+            $calorien +=($ingredient["calorien"]*$ingredient["aantal"])/$ingredient["verpakking"];
             }
 
             return($calorien);

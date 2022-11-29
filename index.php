@@ -20,7 +20,7 @@ $ger = new gerecht($db->getConnection());
 $lij = new boodschappenlijst($db->getConnection());
 
 /// VERWERK 
-$data = $ger->selecteerGerecht(1); 
+$data = $inf->selectUser(3); 
 
 /// RETURN
 echo "<pre>";

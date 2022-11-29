@@ -9,24 +9,13 @@ class info {
         $this->connection = $connection;
         $this->usr = new user ($connection);
     }
-
-    private function selecteerArtikel($artikel_id) {
-            
-        $data = $art->selecteerArtikel($artikel_id);
-        return($data);
-
-    }
     
-    //    addFavoriet ($gerecht_id, $record_type)
-
-    public function addFavoriet($gerecht_id, $user_id) {
-
-        $sql = "INSERT INTO info (gerecht_id, record_type, user_id) VALUES ($gerecht_id, 'F', $user_id)";
-
-        $result = mysqli_query($this->connection, $sql);
-
-
-    }
+        // username
+        
+        private function selectUser($user_id) {
+            $data = $this->usr->selecteerUser($user_id);
+            return($data);
+        }
 
         //    deleteFavoriet ($gerecht_id)
 
@@ -38,39 +27,51 @@ class info {
     
         }
 
-    //      selectie ingredient info
 
-    public function selectInfo($gerecht_id, $record_type) {
+        //    addFavoriet ($gerecht_id, $record_type)
+
+        public function addFavoriet($gerecht_id, $user_id) {
+
+            $sql = "INSERT INTO info (gerecht_id, record_type, user_id) VALUES ($gerecht_id, 'F', $user_id)";
+
+            $result = mysqli_query($this->connection, $sql);
+
+
+    }
+
+        //      selectie ingredient info
+
+        public function selectInfo($gerecht_id, $record_type) {
         
-        $sql = "SELECT * FROM info WHERE gerecht_id = '$gerecht_id' AND record_type = '$record_type'";
-        $return = [];
+            $sql = "SELECT * FROM info WHERE gerecht_id = '$gerecht_id' AND record_type = '$record_type'";
+            $return = [];
 
-        $result = mysqli_query($this->connection, $sql);
-        $arr = [];
+            $result = mysqli_query($this->connection, $sql);
 
-            while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 
-                if ($record_type == "O" || $record_type == "B" || $record_type == "W" || $record_type == "F") { 
+                $arr=[];
+                $user_arr=[];
+
+                $arr[] = [
+                    "id" => $row["id"],
+                    "gerecht_id" => $row ['gerecht_id'],
+                    "record_type" => $row['record_type'],
+                    "datum" => $row['datum'],
+                    "nummeriekveld" => $row['nummeriekveld'],       
+                    "tekstveld" => $row['tekstveld']
+
+                ];
+
+                if ($record_type == "O"|| $record_type == "F") { 
                     $user_id = $row ["user_id"];
-                    $user = $this->usr->selecteerUser($user_id);
-                    $arr[] = [
+                    $user_arr = $this->usr->selecteerUser($user_id);
 
-                        "id" => $row["id"],
-                        "gerecht_id" => $row ['gerecht_id'],
-                        "record_type" => $row['record_type'],
-                        "user_id" => $row['user_id'],
-                        "datum" => $row['datum'],
-                        "user" => $user,
-                        "nummeriekveld" => $row['nummeriekveld'],       
-                        "tekstveld" => $row['tekstveld']
+        }       
+            $return[]=$arr + $user_arr;
+    }
 
-                    ];
-
-    }       
-            
-}
-
-return($arr);
+    return($return);
 
     }}
 ?>
